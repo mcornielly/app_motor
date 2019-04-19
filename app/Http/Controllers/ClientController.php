@@ -14,7 +14,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clietns = Client::all();
+
+        return $clietns;
     }
 
     /**
@@ -35,7 +37,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = Client::create($request->all());
+        $client->save();
     }
 
     /**
@@ -46,7 +49,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        $client = Client::findOrFail($client->id);
     }
 
     /**

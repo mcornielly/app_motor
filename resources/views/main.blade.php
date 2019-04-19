@@ -19,6 +19,7 @@
     <link href="css/simple-line-icons.min.css" rel="stylesheet"> -->
     <!-- Main styles for this application -->
     <link href="css/app.css" rel="stylesheet">
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -96,7 +97,7 @@
     <!-- Bootstrap and necessary plugins -->
     <script src="js/app.js"></script>
     <script src="js/template.js"></script>
-
+    
 <!--     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

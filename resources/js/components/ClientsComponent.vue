@@ -16,7 +16,7 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
                                 <select class="form-control col-md-3" id="opcion" name="opcion">
@@ -27,18 +27,21 @@
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                             </div>
                         </div>
-                    </div>
-                    <table class="table table-bordered table-striped table-sm">
+                    </div> -->
+                    <table id="clientsTable" class="table table-bordered table-striped table-sm table-responsive">
                         <thead>
                             <tr>
                                 <th>Opciones</th>
                                 <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
+                                <th>Nickname</th>
+                                <th>Email</th>
+                                <th>Fecha Nac</th>
+                                <th>Referencia</th>
+                                <th>CP</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for="client in arrayClients" :key="client.id">
                                 <td>
                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
                                       <i class="icon-pencil"></i>
@@ -47,75 +50,16 @@
                                       <i class="icon-trash"></i>
                                     </button>
                                 </td>
-                                <td>Equipos</td>
-                                <td>Dispositivos electrónicos</td>
-                                <td>
-                                    <span class="badge badge-success">Activo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                      <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar">
-                                      <i class="icon-trash"></i>
-                                    </button>
-                                </td>
-                                <td>Equipos</td>
-                                <td>Dispositivos electrónicos</td>
-                                <td>
-                                    <span class="badge badge-success">Activo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                      <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar">
-                                      <i class="icon-trash"></i>
-                                    </button>
-                                </td>
-                                <td>Equipos</td>
-                                <td>Dispositivos electrónicos</td>
-                                <td>
-                                    <span class="badge badge-secondary">Inactivo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                      <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar">
-                                      <i class="icon-trash"></i>
-                                    </button>
-                                </td>
-                                <td>Equipos</td>
-                                <td>Dispositivos electrónicos</td>
-                                <td>
-                                    <span class="badge badge-secondary">Inactivo</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                      <i class="icon-pencil"></i>
-                                    </button>&nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar">
-                                      <i class="icon-trash"></i>
-                                    </button>
-                                </td>
-                                <td>Equipos</td>
-                                <td>Dispositivos electrónicos</td>
-                                <td>
-                                    <span class="badge badge-success">Activo</span>
-                                </td>
+                                <td v-text="client.name"></td>
+                                <td v-text="client.nickname"></td>
+                                <td v-text="client.email"></td>
+                                <td v-text="client.birth_date"></td>
+                                <td v-text="client.reference"></td>
+                                <td v-text="client.cp"></td>
                             </tr>
                         </tbody>
                     </table>
-                    <nav>
+                    <!-- <nav>
                         <ul class="pagination">
                             <li class="page-item">
                                 <a class="page-link" href="#">Ant</a>
@@ -136,7 +80,7 @@
                                 <a class="page-link" href="#">Sig</a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> -->
                 </div>
             </div>
             <!-- Fin ejemplo de tabla Listado -->
@@ -205,9 +149,53 @@
 </template>
 
 <script>
+
+import datables from 'datatables'
+
     export default {
+        data() {
+            return {
+                arrayClients: []
+            }
+        },
+        methods: {
+            myTables() {
+                $(document).ready(function() {
+                    $('#clientsTable').DataTable();
+                } );
+            },
+            getClients() {
+                let me = this;
+                axios.get('/clientes').then(function(response){
+                    me.arrayClients = response.data
+                    me.myTables()
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+
+               
+            }
+        },
         mounted() {
+            this.getClients()
             console.log('Component mounted.')
         }
     }
 </script>
+
+<style>
+    #clientsTable_paginate {
+        float: right;
+    }
+
+   #clientsTable_filter {
+        float: right;
+    }
+
+    .dataTables_filter input { 
+        width: 300px 
+    }
+
+</style>
+

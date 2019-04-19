@@ -13,8 +13,10 @@ const mix = require('laravel-mix');
 
 mix.styles([
 	'resources/layout/css/font-awesome.min.css',
-   	'resources/layout/css/simple-line-icons.min.css',
-   	'resources/layout/css/style.css'
+	'resources/layout/css/simple-line-icons.min.css',
+	'resources/layout/css/style.css'
+	// 'resources/datatables/css/datatables.bootstrap4.min.css'
+	// 'resources/datatables/css/bootstrap4.css',	   
 ], 'public/css/app.css')
 .scripts([
 	'resources/layout/js/jquery.min.js',	
@@ -22,7 +24,9 @@ mix.styles([
 	'resources/layout/js/bootstrap.min.js',	
 	'resources/layout/js/Chart.min.js',
 	'resources/layout/js/pace.min.js',	
-	'resources/layout/js/template.js'	
+	'resources/layout/js/template.js',	
+	'resources/datatables/js/jquery.dataTables.min.js',
+	'resources/datatables/js/dataTables.bootstrap3.min.js'
 ], 'public/js/template.js')
 .js('resources/js/app.js','public/js/app.js');
 

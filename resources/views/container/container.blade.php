@@ -5,8 +5,7 @@
 		<example-component></example-component>
 	</template>
 	<template v-if="menu==1">
-		<h1>Clientes</h1>
-		<example-component></example-component>
+		<clients-component></clients-component>
 	</template>
 	<template v-if="menu==2">
 		<h2>Direcciones</h2>
