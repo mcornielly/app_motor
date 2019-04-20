@@ -12,12 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.styles([
-	'resources/layout/css/font-awesome.min.css',
 	'resources/layout/css/simple-line-icons.min.css',
-	'resources/layout/css/style.css'
+	'resources/layout/css/style.css',
 	// 'resources/datatables/css/datatables.bootstrap4.min.css'
-	// 'resources/datatables/css/bootstrap4.css',	   
+	'resources/datatables/css/bootstrap4.css'
 ], 'public/css/app.css')
+.sass('resources/sass/app.scss', 'public/css/datatables.css')
 .scripts([
 	'resources/layout/js/jquery.min.js',	
 	'resources/layout/js/popper.min.js',	

@@ -18,5 +18,9 @@ use Illuminate\Http\Request;
 // });
 
 Route::get('clients', function(){
-	
+	return datatables()
+		->eloquent(App\Client::query())
+		->addColumn('btn', 'partials.btn-actions')
+		->rawColumns(['btn'])
+		->toJson();
 });

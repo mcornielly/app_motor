@@ -19,6 +19,7 @@
     <link href="css/simple-line-icons.min.css" rel="stylesheet"> -->
     <!-- Main styles for this application -->
     <link href="css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/datatables.css">
 
 </head>
 
@@ -82,7 +83,7 @@
 
             @include('partials.sidebar')
             <!-- Contenido Principal -->
-                @yield('content')
+            @yield('content')
             <!-- /Fin del contenido principal -->
 
         </div>
@@ -97,6 +98,9 @@
     <!-- Bootstrap and necessary plugins -->
     <script src="js/app.js"></script>
     <script src="js/template.js"></script>
+
+    <script src="https://code.iconify.design/1/1.0.1/iconify.min.js"></script>
+    <script src="link_to_your_bundle.js"></script>
     
 <!--     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>

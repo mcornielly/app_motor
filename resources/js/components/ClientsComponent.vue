@@ -8,79 +8,29 @@
         </ol>
         <div class="container-fluid">
             <!-- Ejemplo de tabla Listado -->
-            <div class="card">
+            <div class="card primary">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Categorías
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalNuevo">
+                    <i class="fa fa-align-justify"></i> <strong>Clintes</strong>
+                    <button type="button" class="btn btn-secondary float-right mt-0" data-toggle="modal" data-target="#modalNuevo">
                         <i class="icon-plus"></i>&nbsp;Nuevo
                     </button>
                 </div>
-                <div class="card-body">
-                    <!-- <div class="form-group row">
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <select class="form-control col-md-3" id="opcion" name="opcion">
-                                  <option value="nombre">Nombre</option>
-                                  <option value="descripcion">Descripción</option>
-                                </select>
-                                <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </div> -->
-                    <table id="clientsTable" class="table table-bordered table-striped table-sm table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Opciones</th>
-                                <th>Nombre</th>
-                                <th>Nickname</th>
-                                <th>Email</th>
-                                <th>Fecha Nac</th>
-                                <th>Referencia</th>
-                                <th>CP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="client in arrayClients" :key="client.id">
-                                <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                      <i class="icon-pencil"></i>
-                                    </button> &nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminar">
-                                      <i class="icon-trash"></i>
-                                    </button>
-                                </td>
-                                <td v-text="client.name"></td>
-                                <td v-text="client.nickname"></td>
-                                <td v-text="client.email"></td>
-                                <td v-text="client.birth_date"></td>
-                                <td v-text="client.reference"></td>
-                                <td v-text="client.cp"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- <nav>
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#">Ant</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Sig</a>
-                            </li>
-                        </ul>
-                    </nav> -->
+                <div class="card-body table-responsive">
+                    <div class="table-responsive">
+                        <table id="clientsTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="150px">Opciones</th>
+                                    <th>Nombre</th>
+                                    <th>Nickname</th>
+                                    <th>Email</th>
+                                    <th>Fecha Nac</th>
+                                    <th>Referencia</th>
+                                    <th>CP</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- Fin ejemplo de tabla Listado -->
@@ -152,6 +102,31 @@
 
 import datables from 'datatables'
 
+        var spanish = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+            },
+            "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+
     export default {
         data() {
             return {
@@ -161,30 +136,43 @@ import datables from 'datatables'
         methods: {
             myTables() {
                 $(document).ready(function() {
-                    $('#clientsTable').DataTable();
-                } );
-            },
-            getClients() {
-                let me = this;
-                axios.get('/clientes').then(function(response){
-                    me.arrayClients = response.data
-                    me.myTables()
-                })
-                .catch(function(error){
-                    console.log(error)
-                })
+                    $('#clientsTable').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": "api/clients",
+                        "columns": [
+                            {data: 'btn', name: 'btn', orderable: false, searchable: false},
+                            {data: 'name', name: 'name'},
+                            {data: 'nickname', name: 'nickname'},
+                            {data: 'email', name: 'email'},
+                            {data: 'birth_date', name: 'birth_date'},
+                            {data: 'reference', name: 'reference'},
+                            {data: 'cp', name: 'cp'},
+                        ],
+                         "language": spanish
 
-               
+                    });
+                });
             }
+            // getClients() {
+            //     let me = this;
+            //     axios.get('/clientes').then(function(response){
+            //         me.arrayClients = response.data
+            //         me.myTables()
+            //     })
+            //     .catch(function(error){
+            //         console.log(error)
+            //     })       
+            // }
         },
         mounted() {
-            this.getClients()
+            this.myTables()
             console.log('Component mounted.')
         }
     }
 </script>
 
-<style>
+<!-- <style>
     #clientsTable_paginate {
         float: right;
     }
@@ -197,5 +185,5 @@ import datables from 'datatables'
         width: 300px 
     }
 
-</style>
+</style> -->
 

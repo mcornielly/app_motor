@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('container/container');
 });
 
-Route::get('/clientes', 'ClientController@index');
-Route::post('/clientes/registrar', 'ClientController@store');
-Route::put('/clientes/actualizar', 'ClientController@update');
+Route::resource('clientes', 'ClientController');
+
+// Route::get('/clientes', 'ClientController@index');
+// Route::post('/clientes/registrar', 'ClientController@store');
+// Route::put('/clientes/actualizar', 'ClientController@update');

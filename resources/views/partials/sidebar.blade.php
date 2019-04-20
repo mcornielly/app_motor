@@ -8,18 +8,18 @@
                             Mantenimiento
                         </li>
                         <li class="nav-item nav-dropdown">
-                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-bag"></i> Gerstión de Clientes</a>
+                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-book-open"></i> Gerstión de Clientes</a>
                             <ul class="nav-dropdown-items">
                                 <li @click="menu=1" class="nav-item">
-                                    <a class="nav-link" href="#"><i class="icon-bag"></i> Clientes</a>
+                                    <a class="nav-link" href="#"><i class="icon-briefcase"></i> Clientes</a>
                                 </li>
                                 <li @click="menu=2" class="nav-item">
-                                    <a class="nav-link" href="#"><i class="icon-bag"></i> Dirección</a>
+                                    <a class="nav-link" href="#"><i class="icon-notebook"></i> Dirección</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item nav-dropdown">
-                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-wallet"></i> Gestón de Vehiculos</a>
+                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-drawer"></i> Gestón de Vehiculos</a>
                             <ul class="nav-dropdown-items">
                                 <li class="nav-item">
                                     <a @click="menu=3" class="nav-link" href="i#"><i class="icon-wallet"></i> Vehiculo</a>
